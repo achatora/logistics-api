@@ -18,7 +18,7 @@ def test_item_can_be_created():
 def test_item_rejects_none_name():
 
     with pytest.raises(ValueError):
-        Item(None, Decimal("2.5"), 3)
+        Item(None, Decimal("2.5"), 3)  # pyright: ignore[reportArgumentType]
 
 
 # test if 0 is rejected for quantity
@@ -38,7 +38,7 @@ def test_item_rejects_less_than_zero_quantity():
 # test if None is rejected for weight
 def test_item_rejects_none_weight():
     with pytest.raises(ValueError):
-        Item("Laptop", None, 3)
+        Item("Laptop", None, 3)  # pyright: ignore[reportArgumentType]
 
 
 # test if 0 is rejected for weight
