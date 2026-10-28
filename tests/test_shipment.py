@@ -30,8 +30,8 @@ def valid_shipment_data():
         "sender_address": address,
         "recipient": recipient,
         "items": [
-            Item(name="Box", weight=Decimal(5), quantity=2),  # pyright: ignore[reportArgumentType]
-            Item(name="Laptop", weight=Decimal(3), quantity=1),  # pyright: ignore[reportArgumentType]
+            Item(name="Box", weight=Decimal(5), quantity=2),
+            Item(name="Laptop", weight=Decimal(3), quantity=1),
         ],
     }
 
