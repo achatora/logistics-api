@@ -1,10 +1,18 @@
 from fastapi import APIRouter
 
-from app.api.schemas.shipment import CreateShipmentRequest
+from app.api.schemas.shipment import (
+    CreateShipmentRequest,
+    ShipmentResponse,
+)
 
 router = APIRouter()
 
 
-@router.post("/shipments")
+@router.post(
+    "/shipments",
+    response_model=ShipmentResponse,
+)
 def create_shipment(request: CreateShipmentRequest):
-    return {"message": "Shipment request received"}
+    shipment = request.convert_to_domain()
+
+    return shipment

@@ -100,3 +100,15 @@ def test_rejects_non_positive_item_quantity(valid_shipment_request, quantity):
 
     with pytest.raises(ValidationError):
         CreateShipmentRequest(**valid_shipment_request)
+
+
+def test_converts_request_to_domain_shipment(valid_shipment_request):
+    request = CreateShipmentRequest(**valid_shipment_request)
+
+    shipment = request.convert_to_domain()
+
+    assert shipment.sender_name == "Alfred"
+    assert shipment.sender_address.city == "Warsaw"
+    assert shipment.recipient.name == "John"
+    assert len(shipment.items) == 1
+    assert shipment.items[0].name == "Laptop"
