@@ -1,3 +1,5 @@
+from datetime import UTC
+
 import pytest
 
 from app.customer.customer import Customer
@@ -35,9 +37,9 @@ def test_customer_rejects_blank_phone_number():
 
 
 def test_customer_accepts_populated_ids_and_timestamps():
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     customer = Customer(
         first_name="Felix",
         last_name="Kiptoo",
@@ -52,4 +54,3 @@ def test_customer_accepts_populated_ids_and_timestamps():
     assert customer.user_id == 42
     assert customer.created_at == now
     assert customer.updated_at == now
-
