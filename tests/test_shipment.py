@@ -25,6 +25,8 @@ def valid_shipment_data():
     )
 
     return {
+        "customer_id": 1,
+        "sender_email": "jane@example.com",
         "sender_name": "Jane Doe",
         "sender_phone_number": "987654321",
         "sender_address": address,
@@ -46,6 +48,9 @@ def test_shipment_can_be_created(valid_shipment_data):
 @pytest.mark.parametrize(
     ("field", "value"),
     [
+        ("customer_id", None),
+        ("sender_email", ""),
+        ("sender_email", "   "),
         ("sender_name", ""),
         ("sender_name", "   "),
         ("sender_phone_number", ""),

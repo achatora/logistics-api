@@ -9,14 +9,21 @@ from app.shipment.recipient import Recipient
 from app.shipment.shipment_status import ShipmentStatus
 
 
+# empty string validator
+def empty_str_validator(value: str, field_name: str) -> None:
+    if value is None or not value.strip():
+        raise ValueError(f"{field_name} cannot be empty")
+
+
 @dataclass
 class Shipment:
+    customer_id: int
     sender_name: str
     sender_phone_number: str
+    sender_email: str
     sender_address: Address
     recipient: Recipient
     items: list[Item]
-    customer_id: int | None = None
     shipment_id: UUID = field(default_factory=uuid4)
     status: ShipmentStatus = ShipmentStatus.PENDING
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
@@ -29,11 +36,12 @@ class Shipment:
         )
 
     def __post_init__(self) -> None:
-        if self.sender_name is None or not self.sender_name.strip():
-            raise ValueError("Sender name cannot be empty")
+        if self.customer_id is None:
+            raise ValueError("Customer ID cannot be empty")
 
-        if self.sender_phone_number is None or not self.sender_phone_number.strip():
-            raise ValueError("Sender phone number cannot be empty")
+        empty_str_validator(self.sender_name, "Sender name")
+        empty_str_validator(self.sender_phone_number, "Sender phone number")
+        empty_str_validator(self.sender_email, "Sender email")
 
         if self.sender_address is None:
             raise ValueError("Sender address cannot be empty")
