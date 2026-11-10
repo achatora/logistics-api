@@ -15,7 +15,7 @@ class Item:
         if self.weight is None or self.weight <= Decimal(0):
             raise ValueError("Weight must be greater than zero")
 
-        if self.quantity <= 0:
+        if self.quantity is None or self.quantity <= 0:
             raise ValueError("Quantity must be greater than zero")
 
     @property
