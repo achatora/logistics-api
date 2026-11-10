@@ -7,7 +7,9 @@ from app.api.schemas.shipment import CreateShipmentRequest
 @pytest.fixture
 def valid_shipment_request():
     return {
+        "customer_id": 1,
         "sender_name": "Alfred",
+        "sender_email": "alfred@example.com",
         "sender_phone_number": "123456789",
         "sender_address": {
             "street_address": "Main Street 1",

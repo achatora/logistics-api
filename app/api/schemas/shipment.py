@@ -63,7 +63,9 @@ class ItemSchema(BaseModel):
 
 
 class CreateShipmentRequest(BaseModel):
+    customer_id: int
     sender_name: str
+    sender_email: str
     sender_phone_number: str
     sender_address: AddressSchema
     recipient: RecipientSchema
@@ -71,6 +73,7 @@ class CreateShipmentRequest(BaseModel):
 
     @field_validator(
         "sender_name",
+        "sender_email",
         "sender_phone_number",
     )
     @classmethod
@@ -79,7 +82,9 @@ class CreateShipmentRequest(BaseModel):
 
     def convert_to_domain(self) -> Shipment:
         return Shipment(
+            customer_id=self.customer_id,
             sender_name=self.sender_name,
+            sender_email=self.sender_email,
             sender_phone_number=self.sender_phone_number,
             sender_address=Address(**self.sender_address.model_dump()),
             recipient=Recipient(
@@ -96,6 +101,7 @@ class ShipmentResponse(BaseModel):
 
     shipment_id: UUID
     sender_name: str
+    sender_email: str
     sender_phone_number: str
     sender_address: AddressSchema
     recipient: RecipientSchema

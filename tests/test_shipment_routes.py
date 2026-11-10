@@ -9,7 +9,9 @@ def test_create_shipment():
     response = client.post(
         "/shipments",
         json={
+            "customer_id": 1,
             "sender_name": "Alfred",
+            "sender_email": "alfred@example.com",
             "sender_phone_number": "+48123456789",
             "sender_address": {
                 "street_address": "Main Street 10",
@@ -53,6 +55,7 @@ def test_create_shipment():
     assert set(data.keys()) == {
         "shipment_id",
         "sender_name",
+        "sender_email",
         "sender_phone_number",
         "sender_address",
         "recipient",
@@ -67,7 +70,9 @@ def test_create_shipment_rejects_invalid_request():
     response = client.post(
         "/shipments",
         json={
+            "customer_id": 1,
             "sender_name": "",  # empty sender_name
+            "sender_email": "alfred@example.com",
             "sender_phone_number": "+48123456789",
             "sender_address": {
                 "street_address": "Main Street 10",
