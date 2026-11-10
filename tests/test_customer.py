@@ -1,4 +1,4 @@
-from datetime import UTC
+from datetime import UTC, datetime
 
 import pytest
 
@@ -37,7 +37,6 @@ def test_customer_rejects_blank_phone_number():
 
 
 def test_customer_accepts_populated_ids_and_timestamps():
-    from datetime import datetime
 
     now = datetime.now(UTC)
     customer = Customer(
