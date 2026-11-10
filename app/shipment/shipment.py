@@ -4,15 +4,10 @@ from decimal import Decimal
 from uuid import UUID, uuid4
 
 from app.common.address import Address
+from app.common.validators import empty_str_validator
 from app.shipment.item import Item
 from app.shipment.recipient import Recipient
 from app.shipment.shipment_status import ShipmentStatus
-
-
-# empty string validator
-def empty_str_validator(value: str, field_name: str) -> None:
-    if value is None or not value.strip():
-        raise ValueError(f"{field_name} cannot be empty")
 
 
 @dataclass
